@@ -1,57 +1,57 @@
-import React, { useState } from "react";
+
 import "./styles.css";
 const sourceData = [
   {
     tid: 1,
-    date: "2020-03-10T10:47:02-05:00",
-    credit: 100,
+    date: "2020-04-10T10:47:02-05:00",
+    credit: 200,
     description: "initial deposit"
   },
   {
     tid: 2,
     check_no: 1,
-    date: "2020-03-10T16:50:59Z",
-    debit: 3.14,
-    description: "gum",
+    date: "2020-06-10T16:50:59Z",
+    debit: 3.04,
+    description: "bubble",
     canceled: true
   },
   {
     tid: 3,
     check_no: 2,
-    date: "2020-03-10T16:49:21-05:00",
-    debit: 3.14,
-    description: "gum"
+    date: "2020-08-10T16:49:21-05:00",
+    debit: 3.24,
+    description: "computer repair"
   },
   {
     tid: 4,
-    date: "2020-03-10T13:00:30-05:00",
-    credit: 1.99,
-    description: "pocket change"
+    date: "2020-09-10T13:00:30-05:00",
+    credit: 3.44,
+    description: "wedding gift"
   },
   {
     tid: 5,
-    date: "2020-03-16T09:02:30-05:00",
+    date: "2020-02-16T09:02:30-05:00",
     credit: 420.15,
-    description: "paycheck"
+    description: "pay"
   },
   {
     tid: 6,
     check_no: 3,
     date: "2020-03-16T09:02:30-05:00",
     debit: 19.15,
-    description: "ConEd - March"
+    description: "March"
   },
   {
     tid: 7,
     check_no: 4,
     date: "2020-03-17T11:57:30-05:00",
     debit: 81.45,
-    description: "AT&T"
+    description: "LT"
   },
   {
     tid: 8,
     check_no: 5,
-    date: "2020-03-17T16:02:30-05:00",
+    date: "2020-06-17T16:02:30-05:00",
     debit: 29.03,
     description: "Ikea"
   },
@@ -73,7 +73,7 @@ const sourceData = [
     check_no: 225,
     date: "2020-03-24T14:20:33-05:00",
     debit: 97.76,
-    description: "Strand"
+    description: "haircut"
   },
   {
     tid: 12,
@@ -88,73 +88,42 @@ const sourceData = [
     check_no: 227,
     date: "2020-03-26T19:00:00-05:00",
     debit: 31.01,
-    description: "IHOP"
+    description: "got"
   }
 ];
-const entries = [0];
-// formatting
-const formatDefault = (x) => x.toString();
 
-// sorting - tristate {unsorted,asc,desc}
-const [DIR_NONE, DIR_ASC, DIR_DESC] = [0, 1, 2];
-const sortDirClass = { 1: "sort_asc", 2: "sort_desc", 0: null };
-
-const cmpNoop = () => 0;
-
-// table layout
 const columns = [
   {
     key: "date",
-    cmp: cmpNoop,
-    format: formatDefault,
-    classNames: [],
     label: "Date"
   },
   {
     key: "check_no",
-    cmp: cmpNoop,
-    format: formatDefault,
-    classNames: [],
     label: "No."
   },
   {
     key: "debit",
-    cmp: cmpNoop,
-    format: formatDefault,
-    classNames: ["currency"],
     label: "Debit"
   },
   {
     key: "credit",
-    cmp: cmpNoop,
-    format: formatDefault,
-    classNames: ["currency"],
     label: "Credit"
   },
   {
     key: "balance",
-    cmp: cmpNoop,
-    format: formatDefault,
-    classNames: ["currency", "balance"],
     label: "Balance"
   },
   {
     key: "description",
-    cmp: cmpNoop,
-    format: formatDefault,
-    classNames: [],
     label: "Description"
   },
   {
     key: "canceled",
-    cmp: cmpNoop,
-    format: formatDefault,
-    classNames: ["canceledColumn"],
     label: "Canceled?"
   }
 ];
 
-function HeaderRow({ sortedField, toggleSort }) {
+function HeaderRow() {
   return (
     <div>
       <tr>
@@ -199,41 +168,13 @@ function HeaderRow({ sortedField, toggleSort }) {
   );
 }
 
-/* 
-The associated style sheet will render the checkbox nicely with the following:
-    <td className="canceled canceledColumn">
-      <div className="checkboxWrapper">
-        <div className="md-checkbox">
-          <input id={`cancelCheckbox${check.tid}`} type="checkbox" checked={check.canceled}/>
-          <label htmlFor={`cancelCheckbox${check.tid}`}></label>
-        </div>
-      </div>
-    </td>
-*/
-
-// component to render the check book
 function CheckBook() {
-  const [entries, setEntries] = useState(0); // change as per usage
-  const [sortedField, setSortedField] = useState({});
-
-  const setCancel = async (tid, value) => {
-    setEntries((currentEntries) => [
-      ...currentEntries.slice(0, tid),
-      {
-        ...currentEntries[tid],
-        canceled: value
-      },
-      ...currentEntries.slice(tid + 1)
-    ]);
-  };
-
-  const toggleSort = (key, cmp) => {};
 
   return (
     <div className={"tableWrapper"}>
       <table>
         <thead>
-          <HeaderRow sortedField={sortedField} toggleSort={toggleSort} />
+          <HeaderRow  />
         </thead>
       </table>
     </div>
