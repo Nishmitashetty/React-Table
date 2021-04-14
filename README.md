@@ -1,3 +1,1 @@
 # React-Table
-
-React Checkbook
